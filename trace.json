@@ -5,5 +5,22 @@
   "has_circuit": true,
   "reason": "Conexo y todos los grados pares: existe ciclo euleriano.",
   "circuit": [0, 1, 2, 0, 3, 4, 0],
-  "edge_order": [0, 1, 2, 3, 4, 5]
+  "edge_order": [0, 1, 2, 3, 4, 5],
+  "events": [
+    {"type":"start","u":0,"v":-1,"edge":-1},
+    {"type":"traverse","u":0,"v":1,"edge":0},
+    {"type":"traverse","u":1,"v":2,"edge":1},
+    {"type":"traverse","u":2,"v":0,"edge":2},
+    {"type":"traverse","u":0,"v":3,"edge":3},
+    {"type":"traverse","u":3,"v":4,"edge":4},
+    {"type":"traverse","u":4,"v":0,"edge":5},
+    {"type":"finish","u":0,"v":-1,"edge":5},
+    {"type":"finish","u":4,"v":-1,"edge":4},
+    {"type":"finish","u":3,"v":-1,"edge":3},
+    {"type":"finish","u":0,"v":-1,"edge":2},
+    {"type":"finish","u":2,"v":-1,"edge":1},
+    {"type":"finish","u":1,"v":-1,"edge":0},
+    {"type":"finish","u":0,"v":-1,"edge":-1},
+    {"type":"reverse","u":-1,"v":-1,"edge":-1}
+  ]
 }

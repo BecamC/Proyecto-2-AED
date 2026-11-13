@@ -15,12 +15,17 @@
 //    ...
 //    um vm
 // ============================================================================
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <utility>
+#include <stack>
+#include <algorithm>
+#include <string>
 using namespace std;
 
 int main() {
     int n, m;
-    if (!(cin >> n >> m)) return 1;
+    if (!(cin >> n >> m) || n < 0 || m < 0) return 1;
 
     vector<pair<int,int>> edges(m);
     vector<vector<pair<int,int>>> adj(n);   // adj[u] = lista de (vecino, id_arista)
@@ -28,7 +33,10 @@ int main() {
 
     for (int i = 0; i < m; i++) {
         int u, v;
-        cin >> u >> v;
+        if (!(cin >> u >> v) || u < 0 || v < 0 || u >= n || v >= n) {
+            cerr << "Entrada invalida: vertice fuera de rango.\n";
+            return 1;
+        }
         edges[i] = {u, v};
         adj[u].push_back({v, i});
         adj[v].push_back({u, i});
@@ -68,6 +76,10 @@ int main() {
     else if (!connected)  reason = "El grafo no es conexo: no existe ciclo euleriano.";
     else                  reason = "Conexo y todos los grados pares: existe ciclo euleriano.";
 
+    // Eventos compactos: O(1) por evento, sin copiar la pila completa.
+    struct Event { string type; int u, v, edge; };
+    vector<Event> events;
+
     // ---- Algoritmo de Hierholzer ----
     vector<int> circuit;       // secuencia de vertices del ciclo
     vector<int> edgeOrder;     // orden en que se recorren las aristas (ids)
@@ -76,34 +88,32 @@ int main() {
         vector<int> ptr(n, 0);              // puntero a la sig. arista por explorar en cada vertice
         stack<int> st;
         st.push(start);
+        vector<int> incoming;
+        incoming.push_back(-1);
+        events.push_back({"start", start, -1, -1});
         while (!st.empty()) {
             int u = st.top();
             while (ptr[u] < (int)adj[u].size() && usedEdge[adj[u][ptr[u]].second]) ptr[u]++;
             if (ptr[u] == (int)adj[u].size()) {
                 circuit.push_back(u);       // sin aristas libres: se cierra el sub-ciclo
                 st.pop();
+                int enteredBy = incoming.back();
+                incoming.pop_back();
+                if (enteredBy != -1) edgeOrder.push_back(enteredBy);
+                events.push_back({"finish", u, -1, enteredBy});
             } else {
                 auto [v, id] = adj[u][ptr[u]];
                 usedEdge[id] = true;        // consumimos la arista
                 ptr[u]++;
                 st.push(v);
+                incoming.push_back(id);
+                events.push_back({"traverse", u, v, id});
             }
         }
         reverse(circuit.begin(), circuit.end());
 
-        // Reconstruimos el orden de aristas a partir del circuito de vertices
-        map<pair<int,int>, vector<int>> byPair;
-        for (int i = 0; i < m; i++) {
-            int a = edges[i].first, b = edges[i].second;
-            if (a > b) swap(a, b);
-            byPair[{a,b}].push_back(i);
-        }
-        map<pair<int,int>, int> idx;
-        for (size_t i = 0; i + 1 < circuit.size(); i++) {
-            int a = circuit[i], b = circuit[i+1];
-            if (a > b) swap(a, b);
-            edgeOrder.push_back(byPair[{a,b}][ idx[{a,b}]++ ]);
-        }
+        reverse(edgeOrder.begin(), edgeOrder.end());
+        events.push_back({"reverse", -1, -1, -1});
     }
 
     // ---- Salida JSON ----
@@ -130,7 +140,16 @@ int main() {
 
     cout << "  \"edge_order\": [";
     for (size_t i = 0; i < edgeOrder.size(); i++) { cout << edgeOrder[i]; if (i + 1 < edgeOrder.size()) cout << ", "; }
-    cout << "]\n";
+    cout << "],\n";
+    cout << "  \"events\": [";
+    for (size_t i = 0; i < events.size(); ++i) {
+        const auto &e = events[i];
+        if (i) cout << ",";
+        cout << "\n    {\"type\":\"" << e.type
+             << "\",\"u\":" << e.u << ",\"v\":" << e.v
+             << ",\"edge\":" << e.edge << "}";
+    }
+    cout << "\n  ]\n";
 
     cout << "}\n";
     return 0;

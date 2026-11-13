@@ -1,0 +1,11 @@
+{
+  "n": 3,
+  "edges": [[0,1], [1,2]],
+  "degrees": [1, 2, 1],
+  "has_circuit": false,
+  "reason": "Hay vertices de grado impar: no existe ciclo euleriano.",
+  "circuit": [],
+  "edge_order": [],
+  "events": [
+  ]
+}
