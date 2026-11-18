@@ -33,6 +33,43 @@ Requiere g++ con soporte C++17. Desde la carpeta del proyecto:
 
 Se usa cmd para que la redirección funcione también desde PowerShell y no cambie la codificación del JSON. Los JSON incluidos fueron generados por esta versión del C++.
 
+## Probar con un grafo propio
+El script probar_grafo.py permite ingresar un grafo propio y ver si tiene ciclo euleriano, sin modificar los traces del proyecto (trace.json, trace_borde.json y trace_retroceso.json se mantienen intactos).
+
+Ingresar el grafo a mano (el programa pide n, m y luego cada arista):
+
+    python probar_grafo.py
+
+Leer el grafo desde un archivo propio:
+
+    python probar_grafo.py mi_grafo.txt
+
+Agregar --animar a cualquiera de los dos para abrir directamente la animación en Manim:
+
+    python probar_grafo.py --animar
+
+Formato del grafo (el mismo que usa euler.cpp): la primera línea es "n m" (número de vértices y de aristas) y luego una arista "u v" por línea, con vértices numerados de 0 a n-1. Ejemplo, un cuadrado:
+
+    4 4
+    0 1
+    1 2
+    2 3
+    3 0
+
+Qué hace el script:
+- Valida la entrada (enteros, vértices dentro de 0..n-1) y vuelve a pedir el dato si hay un error.
+- En modo manual guarda el grafo en grafo_mio.txt para poder reutilizarlo.
+- Ejecuta euler.exe (si no existe, lo compila con g++ -std=c++17) y guarda el resultado en trace_mio.json, un archivo aparte.
+- Muestra los grados, si existe o no el ciclo y por qué, y el ciclo encontrado.
+- Avisa si el grafo tiene lazos, aristas paralelas o más de 10 vértices, porque la animación no los representa bien (el C++ sí los procesa correctamente).
+
+Para animar después un trace propio ya generado (PowerShell):
+
+    $env:EULER_TRACE="trace_mio.json"
+    python -m manim -pql animacion.py GrafoEuleriano
+
+Con 5 vértices la animación usa la disposición fija de los ejemplos; con otro número de vértices los coloca en círculo.
+
 ## Eventos
 - start: apilar el vértice inicial.
 - traverse: consumir una arista y apilar su destino.
