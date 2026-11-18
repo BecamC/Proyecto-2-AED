@@ -46,6 +46,8 @@ C++: O(V+E) tiempo y memoria, incluyendo eventos y serialización; se eliminó m
 La convención del programa considera sin ciclo a un grafo sin aristas. Los vértices aislados no impiden el ciclo de la componente con aristas.
 El C++ maneja aristas paralelas y lazos. Esta visualización con líneas rectas está diseñada para grafos simples pequeños como los tres ejemplos; no representa adecuadamente lazos ni aristas paralelas.
 
+#Link del Drive (Video y Informe) : < aqui ira el link>
+
 ## Verificación
 C++ compilado con advertencias activadas. Comprobados los eventos y el ciclo de los ejemplos, además de pruebas aleatorias contra condiciones de existencia. Python verificado sintácticamente. No se renderizó Manim en el entorno de preparación; comprobar visualmente en el equipo del usuario.
 
