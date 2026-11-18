@@ -8,6 +8,8 @@ import numpy as np
 class GrafoEuleriano(Scene):
     def construct(self):
         ruta = Path(__file__).resolve().parent / os.environ.get('EULER_TRACE', 'trace.json')
+        if not ruta.exists():
+            raise FileNotFoundError(f'No existe {ruta.name}. Genera las trazas con: .\\generar.ps1')
         datos = json.loads(ruta.read_text(encoding='utf-8-sig'))
         self.camera.background_color = '#101827'
 

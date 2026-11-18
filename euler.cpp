@@ -25,7 +25,10 @@ using namespace std;
 
 int main() {
     int n, m;
-    if (!(cin >> n >> m) || n < 0 || m < 0) return 1;
+    if (!(cin >> n >> m) || n < 0 || m < 0) {
+        cerr << "Entrada invalida: se esperaba \"n m\" con n, m >= 0.\n";
+        return 1;
+    }
 
     vector<pair<int,int>> edges(m);
     vector<vector<pair<int,int>>> adj(n);   // adj[u] = lista de (vecino, id_arista)
@@ -33,8 +36,12 @@ int main() {
 
     for (int i = 0; i < m; i++) {
         int u, v;
-        if (!(cin >> u >> v) || u < 0 || v < 0 || u >= n || v >= n) {
-            cerr << "Entrada invalida: vertice fuera de rango.\n";
+        if (!(cin >> u >> v)) {
+            cerr << "Entrada invalida: faltan aristas (se leyeron " << i << " de " << m << ").\n";
+            return 1;
+        }
+        if (u < 0 || v < 0 || u >= n || v >= n) {
+            cerr << "Entrada invalida: vertice fuera de rango en la arista " << i << ".\n";
             return 1;
         }
         edges[i] = {u, v};

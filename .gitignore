@@ -1,0 +1,24 @@
+# Las trazas del proyecto (trace.json, trace_borde.json, trace_retroceso.json),
+# el video y el informe SI se versionan. Solo se ignoran las pruebas personales:
+grafo_mio.txt
+trace_mio.json
+
+# Binarios compilados
+*.exe
+*.o
+*.out
+
+# Salida de Manim (se regenera con python -m manim ...)
+media/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editores / SO
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

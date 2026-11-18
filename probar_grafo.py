@@ -89,7 +89,7 @@ def asegurar_ejecutable():
         return
     gpp = shutil.which('g++')
     if gpp is None:
-        sys.exit('No se encontro euler.exe ni g++. Compila euler.cpp con g++ -std=c++17 (ver README).')
+        sys.exit('No se encontro euler.exe ni g++. Ejecuta primero .\\generar.ps1 (ver README).')
     print('Compilando euler.cpp ...')
     subprocess.run([gpp, '-std=c++17', '-O2', '-Wall', '-Wextra', str(CPP), '-o', str(EXE)], check=True)
 
