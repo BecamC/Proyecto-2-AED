@@ -132,5 +132,3 @@ C++: O(V+E) en tiempo y memoria, incluyendo los eventos y la serialización. Cad
 - `probar_grafo.py` probado en modo manual (incluida una arista fuera de rango, que vuelve a pedir), desde archivo (con `grafo_retroceso.txt` genera la misma traza que `trace_retroceso.json`) y con un grafo de grados impares.
 - `validar_euler.py` pasa: grafo vacío, vértices aislados, grados impares, grafo no conexo, aristas paralelas, lazos, entradas inválidas, 400 grafos aleatorios y grafos de hasta 400 000 vértices y 800 000 aristas.
 - Manim Community 0.22.1 (Python 3.14) renderiza los tres traces sin errores, y el `assert` de reconstrucción pasa.
-
-Pendiente para el video final: añadir motivación, explicación conceptual, complejidad y créditos.
