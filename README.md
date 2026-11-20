@@ -2,7 +2,11 @@
 
 Implementación C++17 del algoritmo de Hierholzer para grafos no dirigidos, con IDs de aristas, eventos compactos y animación Manim. Arquitectura: **motor C++ → JSON de eventos → animación Manim**.
 
+<<<<<<< HEAD
 **Video e informe (Google Drive):** [LINK](https://drive.google.com/drive/folders/14wzG_hF7409r3mf0_ayj3iV3ZQq7wb76?usp=sharing)
+=======
+**Video e informe (Google Drive):** [PEGAR_AQUI_EL_LINK_DEL_DRIVE](PEGAR_AQUI_EL_LINK_DEL_DRIVE)
+>>>>>>> bc5f4e6 (Version final)
 
 ## Archivos
 

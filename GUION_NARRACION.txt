@@ -1,0 +1,42 @@
+GUION PARA GRABAR — CICLO EULERIANO
+Los tiempos son aproximados. Mira primero el video renderizado y graba por secciones. Las indicaciones entre corchetes no se leen. No es necesario hablar durante cada movimiento.
+
+00:00 — PORTADA
+Somos Miguel Fernando Ucañani Tintaya, Alonso Aarón Benites Camacho y David Alonso Ortiz Palomino. Presentamos el ciclo euleriano y su construcción mediante el algoritmo de Hierholzer.
+
+00:13 — MOTIVACIÓN
+Imaginemos que debemos recorrer todas las calles de una zona exactamente una vez y regresar al punto de partida. Podemos representar las intersecciones como vértices y las calles como aristas de un grafo. Antes de buscar una ruta, necesitamos responder una pregunta: ¿la estructura de este grafo permite hacer ese recorrido?
+
+00:38 — DEFINICIÓN
+Un ciclo euleriano es un recorrido cerrado que utiliza cada arista exactamente una vez. Los vértices sí pueden repetirse. Para un grafo no dirigido con aristas, deben cumplirse dos condiciones: todos los grados son pares y todos los vértices que tienen aristas pertenecen a una misma componente conexa. Los vértices aislados no afectan esta condición.
+
+01:04 — MÉTODO
+Hierholzer utiliza una pila. Si el vértice actual tiene una arista libre, la utiliza y apila el destino. Si ya no tiene aristas disponibles, lo retira de la pila y lo guarda en una salida provisional. Cuando la pila queda vacía, invierte esa salida para obtener el ciclo.
+
+01:25 — EJECUCIÓN REAL
+[Durante la aparición del grafo y los grados.]
+Veamos la ejecución real del programa C++. El grafo tiene grados pares y sus vértices están conectados.
+
+[Cuando comienza el recorrido.]
+El aro amarillo indica el vértice actual. Las aristas verdes ya fueron utilizadas. A la derecha, la pila registra los vértices del recorrido.
+
+[Al primer retroceso, cuando se vuelve de 0 a 2 y luego a 1.]
+Al quedarnos sin aristas libres, guardamos vértices en la salida provisional. Retroceder en la pila no significa volver a recorrer una arista.
+
+[Cuando se explora el subciclo desde el vértice 1.]
+Al regresar a un vértice que todavía tiene aristas disponibles, continuamos explorando.
+
+[En la inversión final.]
+Finalmente, invertimos la salida y obtenemos el ciclo euleriano.
+
+02:08 — CASO DE BORDE
+Ahora cambiamos la entrada por el camino cero, uno, dos. Sus grados son uno, dos y uno. El programa detecta los vértices de grado impar y comunica que no existe un ciclo euleriano.
+
+02:25 — EXPLICACIÓN DEL CASO
+Podemos recorrer las dos aristas desde cero hasta dos, pero terminaríamos en un vértice diferente. Para volver al inicio tendríamos que repetir aristas. Por eso existe un camino euleriano abierto, pero no un ciclo.
+
+02:40 — COMPLEJIDAD
+La complejidad temporal es O de V más E. Cada arista se utiliza una sola vez y los punteros avanzan sin reiniciar la búsqueda. Las listas, la pila y los eventos necesitan memoria O de V más E. Esta complejidad corresponde al algoritmo; generar las imágenes del video tiene un costo diferente.
+
+03:02 — CIERRE
+Hierholzer permite construir un recorrido cerrado que cubre todas las aristas una sola vez, cuando el grafo cumple las condiciones necesarias. Nuestra animación reproduce los eventos reales generados por el programa. Gracias.
